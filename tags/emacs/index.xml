@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>emacs on Jin's blog</title><link>https://nvimer.org/tags/emacs/</link><description>Recent content in emacs on Jin's blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 02 Mar 2023 19:28:20 +0000</lastBuildDate><atom:link href="https://nvimer.org/tags/emacs/index.xml" rel="self" type="application/rss+xml"/><item><title>Emacs Config</title><link>https://nvimer.org/posts/emacs-config/</link><pubDate>Thu, 02 Mar 2023 19:28:20 +0000</pubDate><guid>https://nvimer.org/posts/emacs-config/</guid><description>Preface Recently, I learned emacs and elisp, this article records the problems I encountered during using.
+Some learning data:
+Elisp Tutorial Boolean in elisp In elisp, only nil is flase, others are true (including empty vector).
+For convenience, we usually use t to represent true
+How to set custom virable file name Just as this:
+;; set custom config file (setq custom-file (expand-file-name &amp;#34;custom.el&amp;#34; user-emacs-directory)) ;; auto load custom file (when (file-exists-p custom-file) (load-file custom-file)) Lightweight finished frame Maybe you use ivy or helm, these are very good plugins for command compeletion.</description></item></channel></rss>

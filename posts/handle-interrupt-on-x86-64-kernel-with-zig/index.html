@@ -1,0 +1,111 @@
+<!doctype html><html class="not-ready lg:text-base" style=--bg:#faf8f1 lang=en-us><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><title>Handle Interrupt on x86-64 kernel with zig - Jin's blog</title><meta name=theme-color><meta name=description content="Preface On x86_64, if we want to handle interrupts, we need to define IDT(Interrupt Descriptor Table), it has 256 elements.
+And we also need to set IDTR(Interrupt Descriptor Table Register). In this article, we won’t discuss setting up IDT, that would be too long.
+We just discuss how to handle interruptions gracefully, pay attention, what we are talking about here is the interrupt handling function, in other words, what you want to fill in the ide (it only fills part of the idt)."><meta name=author content="jinzhongjia"><link rel="preload stylesheet" as=style href=https://nvimer.org/main.min.css><link rel=preload as=image href=https://nvimer.org/theme.svg><link rel=preload as=image href="https://cdn.v2ex.com/gravatar/7758c1a397902e1c8c7db72162aa42cb?s=160&amp;d=identicon"><link rel=preload as=image href=https://nvimer.org/github.svg><link rel=preload as=image href=https://nvimer.org/rss.svg><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css integrity=sha384-3UiQGuEI4TTMaFmGIZumfRPtfKQ3trwQE2JgosJxCnGmQpL/lJdjpcHkaaFwHlcI crossorigin=anonymous><script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js integrity=sha384-G0zcxDFp5LWZtDuRMnBkk3EphCK1lhEf4UEyEM693ka574TZGwo4IWwS6QLzM/2t crossorigin=anonymous></script>
+<script defer src=https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous></script>
+<script>document.addEventListener("DOMContentLoaded",()=>renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}],throwOnError:!1}))</script><link rel=icon href=https://nvimer.org/favicon.ico><link rel=apple-touch-icon href=https://nvimer.org/apple-touch-icon.png><meta name=generator content="Hugo 0.119.0"><meta itemprop=name content="Handle Interrupt on x86-64 kernel with zig"><meta itemprop=description content="Preface On x86_64, if we want to handle interrupts, we need to define IDT(Interrupt Descriptor Table), it has 256 elements.
+And we also need to set IDTR(Interrupt Descriptor Table Register). In this article, we won’t discuss setting up IDT, that would be too long.
+We just discuss how to handle interruptions gracefully, pay attention, what we are talking about here is the interrupt handling function, in other words, what you want to fill in the ide (it only fills part of the idt)."><meta itemprop=datePublished content="2023-11-12T17:37:22+00:00"><meta itemprop=dateModified content="2023-11-12T17:37:22+00:00"><meta itemprop=wordCount content="578"><meta itemprop=keywords content="zig,x86_64,"><meta property="og:title" content="Handle Interrupt on x86-64 kernel with zig"><meta property="og:description" content="Preface On x86_64, if we want to handle interrupts, we need to define IDT(Interrupt Descriptor Table), it has 256 elements.
+And we also need to set IDTR(Interrupt Descriptor Table Register). In this article, we won’t discuss setting up IDT, that would be too long.
+We just discuss how to handle interruptions gracefully, pay attention, what we are talking about here is the interrupt handling function, in other words, what you want to fill in the ide (it only fills part of the idt)."><meta property="og:type" content="article"><meta property="og:url" content="https://nvimer.org/posts/handle-interrupt-on-x86-64-kernel-with-zig/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-11-12T17:37:22+00:00"><meta property="article:modified_time" content="2023-11-12T17:37:22+00:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Handle Interrupt on x86-64 kernel with zig"><meta name=twitter:description content="Preface On x86_64, if we want to handle interrupts, we need to define IDT(Interrupt Descriptor Table), it has 256 elements.
+And we also need to set IDTR(Interrupt Descriptor Table Register). In this article, we won’t discuss setting up IDT, that would be too long.
+We just discuss how to handle interruptions gracefully, pay attention, what we are talking about here is the interrupt handling function, in other words, what you want to fill in the ide (it only fills part of the idt)."><link rel=canonical href=https://nvimer.org/posts/handle-interrupt-on-x86-64-kernel-with-zig/></head><body class="text-black duration-200 ease-out dark:text-white"><header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center"><div class="relative z-50 mr-auto flex items-center"><a class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold" href=https://nvimer.org/>Jin's blog</a><div class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]" role=button aria-label=Dark></div></div><div class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden" role=button aria-label=Menu></div><script>const htmlClass=document.documentElement.classList;setTimeout(()=>{htmlClass.remove("not-ready")},10);const btnMenu=document.querySelector(".btn-menu");btnMenu.addEventListener("click",()=>{htmlClass.toggle("open")});const metaTheme=document.querySelector('meta[name="theme-color"]'),lightBg="#faf8f1".replace(/"/g,""),setDark=e=>{metaTheme.setAttribute("content",e?"#000":lightBg),htmlClass[e?"add":"remove"]("dark"),localStorage.setItem("dark",e)},darkScheme=window.matchMedia("(prefers-color-scheme: dark)");if(htmlClass.contains("dark"))setDark(!0);else{const e=localStorage.getItem("dark");setDark(e?e==="true":darkScheme.matches)}darkScheme.addEventListener("change",e=>{setDark(e.matches)});const btnDark=document.querySelector(".btn-dark");btnDark.addEventListener("click",()=>{setDark(localStorage.getItem("dark")!=="true")})</script><div class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"><nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6"><a class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal" href=/about/>About</a></nav><nav class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"><a class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./github.svg) href=https://github.com/jinzhongjia target=_blank rel=me>github</a>
+<a class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6" style=--url:url(./rss.svg) href=https://nvimer.org/index.xml target=_blank rel=alternate>rss</a></nav></div></header><main class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"><article><header class=mb-16><h1 class="!my-0 pb-2.5">Handle Interrupt on x86-64 kernel with zig</h1><div class="text-sm antialiased opacity-60"><time>Nov 12, 2023</time></div></header><section><h2 id=preface>Preface</h2><p>On x86_64, if we want to handle interrupts, we need to define IDT(Interrupt Descriptor Table), it has 256 elements.</p><p>And we also need to set IDTR(Interrupt Descriptor Table Register). In this article, we won’t discuss setting up IDT, that would be too long.</p><p>We just discuss how to handle interruptions gracefully, pay attention, what we are talking about here is the interrupt handling function, in other words, what you want to fill in the ide (it only fills part of the idt).</p><h2 id=tradition>Tradition</h2><p>Let we look at osdev(which is the richest os development website), the url is this: <a href=https://wiki.osdev.org/Interrupts_Tutorial>https://wiki.osdev.org/Interrupts_Tutorial</a>.</p><p>In osdev, it will tell you to do this, using intel assembly syntax with macro feature:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nasm data-lang=nasm><span style=display:flex><span><span style=color:#75715e>%macro isr_err_stub 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>isr_stub_</span><span style=color:#f92672>%+%</span><span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>call</span> exception_handler
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>iret</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%endmacro
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>; if writing for 64-bit, use iretq instead</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%macro isr_no_err_stub 1
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#a6e22e>isr_stub_</span><span style=color:#f92672>%+%</span><span style=color:#ae81ff>1</span>:
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>call</span> exception_handler
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>iret</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>%endmacro
+</span></span></span></code></pre></div><p>and this code just is a simple handle creator macro, it not store general register status, very unsafe and elegant.</p><h2 id=with-zig-gracefully>With zig gracefully</h2><p>For handling interrupts more precisely, we need to understand what the CPU does when an interrupt occurs, you can see this:{% post_link interrupt-function [interrupt-function] %}</p><p>Then we use feature <code>Naked</code> function in zig, it will throw away the function calling convention, usually used on inline assembly.</p><p>So we can we can get the following function:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-zig data-lang=zig><span style=display:flex><span><span style=color:#66d9ef>fn</span> generate_handle(<span style=color:#66d9ef>comptime</span> num<span style=color:#f92672>:</span> <span style=color:#66d9ef>u8</span>) <span style=color:#66d9ef>fn</span> () callconv(.Naked) <span style=color:#66d9ef>void</span> {
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> error_code_list <span style=color:#f92672>=</span> [_]<span style=color:#66d9ef>u8</span>{ <span style=color:#ae81ff>8</span>, <span style=color:#ae81ff>10</span>, <span style=color:#ae81ff>11</span>, <span style=color:#ae81ff>12</span>, <span style=color:#ae81ff>13</span>, <span style=color:#ae81ff>14</span>, <span style=color:#ae81ff>17</span>, <span style=color:#ae81ff>21</span>, <span style=color:#ae81ff>29</span>, <span style=color:#ae81ff>30</span> };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> public <span style=color:#f92672>=</span> std.fmt.comptimePrint(
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push ${}</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rax</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rbx</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rcx</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rdx</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rsp</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rbp</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rsi</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %rdi</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r8</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r9</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r10</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r11</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r12</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r13</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r14</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push %r15</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     mov %rsp, context</span>
+</span></span><span style=display:flex><span>    , .{num});
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> save_status <span style=color:#f92672>=</span> <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>for</span> (error_code_list) <span style=color:#f92672>|</span>value<span style=color:#f92672>|</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> (value <span style=color:#f92672>==</span> num) {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>break</span> <span style=color:#66d9ef>true</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    } <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>false</span>)
+</span></span><span style=display:flex><span>        public
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     push $0b10000000000000000</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// Note: the Line breaks are very important
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#f92672>++</span>
+</span></span><span style=display:flex><span>            public;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>const</span> restore_status <span style=color:#f92672>=</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     mov context, %rsp</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r15</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r14</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r13</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r12</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r11</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r10</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r9</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %r8</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rdi</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rsi</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rbp</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rsp</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rdx</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rcx</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rbx</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     pop %rax</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     add $16, %rsp</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>\\     iretq</span>
+</span></span><span style=display:flex><span>    ;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>struct</span> {
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>fn</span> handle() callconv(.Naked) <span style=color:#66d9ef>void</span> {
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>asm</span> <span style=color:#66d9ef>volatile</span> (save_status <span style=color:#f92672>:::</span> <span style=color:#e6db74>&#34;memory&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#75715e>// interruptDispatch just is a higher level interrupt handling function
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>asm</span> <span style=color:#66d9ef>volatile</span> (<span style=color:#e6db74>&#34;call interruptDispatch&#34;</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>asm</span> <span style=color:#66d9ef>volatile</span> (restore_status <span style=color:#f92672>:::</span> <span style=color:#e6db74>&#34;memory&#34;</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    }.handle;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>we use the comptime feature of zig to generate a inline assembly function, the <code>error_code_list</code> is an array of EXCEPTION which has error_code.</p><p>So we assume that the top layout of the stack is:</p><pre tabindex=0><code>bottom of stack
+--------
+SS
+------
+ESP
+------
+EFLAGS
+------
+CS
+------
+EIP
+------
+Error Code
+------
+Interrupt Number
+------
+General Purpose Registers
+--------
+top of stack
+</code></pre><p>When Interrupt number not has an error code, we will just push a fake error code to stack, here is <code>$0b10000000000000000</code>.</p><p>Then we will assign <code>RSP</code> to <code>context</code>(a structure pointer), then call <code>interruptDispatch</code> to execute more specific function logic.</p><p>After the execution is completed, we try to restore the original register context, so we pop most register, and use <code>iretq</code> to return to the original place and continue execution.</p><p>Why add 16 to <code>RSP</code>, because of maintaining the calling convention of <code>iretq</code>.</p></section><footer class="mt-12 flex flex-wrap"><a class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]" href=https://nvimer.org/tags/zig>zig</a>
+<a class="mb-1.5 mr-1.5 rounded-lg bg-black/[3%] px-5 py-1.5 no-underline dark:bg-white/[8%]" href=https://nvimer.org/tags/x86_64>x86_64</a></footer></article></main><footer class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"><div class=mr-auto>&copy; 2024
+<a class=link href=https://nvimer.org/>Jin's blog</a></div><a class="link mx-6" href=https://gohugo.io/ rel=noopener target=_blank>Powered by Hugo️️</a>️
+<a class=link href=https://github.com/nanxiaobei/hugo-paper rel=noopener target=_blank>✎ Paper</a></footer></body></html>
