@@ -3,12 +3,11 @@ layout: post
 title: Interrupt Function
 date: 2023-10-03 21:27:20
 tags:
-- linux
-- kernel
+    - linux
+    - kernel
 ---
 
 # Interrupt
-
 
 Here's what happens when you use the INT instruction to push on the stack:
 

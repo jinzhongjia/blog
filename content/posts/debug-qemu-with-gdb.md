@@ -36,12 +36,12 @@ qemu-system-x86_64 -kernel ./kernel -initrd  ./rootfs.img -append "nokaslr conso
 
 The parameters of the command line are as follows:
 
-- *-kernel* *./kernel*: start the specified elf kernel image
-- *-initrd* *./rootfs.img*: in-memory file system started
-- *-append* *"nokaslr console=ttyS0"*: additional parameters, "**nokaslr**" must be added to prevent randomization of the kernel start address, which will cause gdb breakpoints to fail to hit
-- *-s*: default listen on port 1234
-- *-S*: hang after startup, waiting for gdb connection
-- *-nographic*: no graph start
+-   _-kernel_ _./kernel_: start the specified elf kernel image
+-   _-initrd_ _./rootfs.img_: in-memory file system started
+-   _-append_ _"nokaslr console=ttyS0"_: additional parameters, "**nokaslr**" must be added to prevent randomization of the kernel start address, which will cause gdb breakpoints to fail to hit
+-   _-s_: default listen on port 1234
+-   _-S_: hang after startup, waiting for gdb connection
+-   _-nographic_: no graph start
 
 ### Second, start gdb
 
@@ -50,7 +50,7 @@ After we start `qemu`, it will wait for the gdb connection
 now, we should input gdb in terminal, like this:
 
 ```sh
-[linux]$ gdb 
+[linux]$ gdb
 (gdb) file zig-out/bin/zos      # file read the symbol table of kernel
 (gdb) target remote :1234
 (gdb) break init                # breakpoint, break and hbreak all ok
@@ -61,4 +61,4 @@ now, we should input gdb in terminal, like this:
 
 ## Reference
 
-- [GDB Document](https://www.sourceware.org/gdb/documentation/)
+-   [GDB Document](https://www.sourceware.org/gdb/documentation/)

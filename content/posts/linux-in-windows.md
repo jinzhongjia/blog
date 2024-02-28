@@ -3,8 +3,8 @@ layout: post
 title: Linux in Windows
 date: 2023-04-04 03:10:25
 tags:
-- linux
-- windows
+    - linux
+    - windows
 ---
 
 # Preface
@@ -31,7 +31,7 @@ After installing, we will meet some error when install package, here is recorded
 
 **ldconfig: /usr/lib/wsl/lib/libcuda.so.1 is not a symbolic link**
 
-*[Reference](https://github.com/yuk7/ArchWSL/issues/248)*
+_[Reference](https://github.com/yuk7/ArchWSL/issues/248)_
 
 > Actually this is not relate to Arch, nor ArchWSL. It's caused by libcuda.so in your C:\Windows\System32\lxss\lib\ folder not a symbolic link, which is installed by nvidia driver. One solution to fuck the warning is delete libcuda.so and libcuda.so.1 and use make symbolic link to libcuda.so.1.1.
 

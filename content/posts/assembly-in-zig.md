@@ -3,8 +3,8 @@ layout: post
 title: Assembly in Zig
 date: 2023-04-01 21:51:41
 tags:
-- zig
-- assembly
+    - zig
+    - assembly
 ---
 
 # Preface
@@ -15,8 +15,8 @@ When computer boot, we need to deploy with assembly so we can enter protected mo
 
 ## Zig reference assembly
 
-
 ### Seprate File
+
 we just need to declare the `assembly function` with keyword `extern`
 
 For example, we next use zig to call assembly to print our most common "Hello, World!"
@@ -221,7 +221,7 @@ Inline assembly is an expression which returns a value, the `asm` keyword begins
 
 `syscall` is assembly instructions.
 
-After the first colon is the output section, `ret_reference` is reference of output, `"={rax}"` is  the output constraint string, In this example, the constraint string means "the result value of this inline assembly instruction is whatever is in $rax". `(-> usize)`, it is either a value binding, or `->` and then a type. The type is the result type of the inline assembly expression. If it is a value binding, then `%[ret]` syntax would be used to refer to the register bound to the value.
+After the first colon is the output section, `ret_reference` is reference of output, `"={rax}"` is the output constraint string, In this example, the constraint string means "the result value of this inline assembly instruction is whatever is in $rax". `(-> usize)`, it is either a value binding, or `->` and then a type. The type is the result type of the inline assembly expression. If it is a value binding, then `%[ret]` syntax would be used to refer to the register bound to the value.
 
 After the second colon is the output section, `ret_reference` is reference of input, we can have these in the asm string and it would refer to the operands, the register `rax` and register `rdi` will have the value of `number` and `arg1`
 

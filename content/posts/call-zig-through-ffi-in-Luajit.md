@@ -3,7 +3,7 @@ layout: post
 title: Call zig through FFI in Luajit
 date: 2023-12-20 18:45:59
 tags:
-- zig
+    - zig
 ---
 
 # Preface
@@ -18,18 +18,18 @@ In luajit, FFI is an embedded module, we just can use this to import it:
 
 ```lua
 local ffi = require("ffi")
-ffi.cdef[[ 
+ffi.cdef[[
   int printf(const char *fmt, ...);
 ]]
 
-ffi.C.printf("Hello %s!\n", "world")  
+ffi.C.printf("Hello %s!\n", "world")
 ```
 
 A brief snippet, aha ?
 
 This code is for importing `ffi` and define a function prototype with `ffi.cdef`, then we use `ffi.c.printf` to call clib's function called `printf` to print "Hello, world".
 
-`ffi.c` is a namespace for c standard library prototype, through  it we can easily call C standard functions!
+`ffi.c` is a namespace for c standard library prototype, through it we can easily call C standard functions!
 
 ### Advanced use
 
@@ -41,7 +41,7 @@ em... we need to use `ffi.load` :
 clib = ffi.load(name [,global])
 ```
 
-the parameter `name` is the dynamic library name, and when `global` is true, the symbol table will be loaded in global namespace. if  `name` is a path, it will load dynamic library from the specified path.
+the parameter `name` is the dynamic library name, and when `global` is true, the symbol table will be loaded in global namespace. if `name` is a path, it will load dynamic library from the specified path.
 
 OK, this is a brief usage for `FFI`.
 
