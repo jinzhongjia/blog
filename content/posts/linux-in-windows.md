@@ -76,7 +76,7 @@ Then just finish your command you were running, such as `sudo pacman -S bat`
 
 And remember to reboot the system
 
-**Enable `systemctl`**
+**Enable** `systemctl`
 
 Now, wsl2 disable `systemctl`, we can easily enable this for every `wsl`, just add this to `/etc/wsl.conf`(It doesn't exist by default, you need to create it manually):
 
@@ -90,3 +90,17 @@ If the following command returns systemd, it means that systemd has started
 ```
 ps --no-headers -o comm 1
 ```
+
+**Enable** mirror network:
+
+After windows11 22H2, mirror network is available, just edit the `.wslconfig` (Default, this file does not exist, it must be created and stored in the `%UserProfile%` directory to apply these configuration settings).
+
+```conf
+[wsl2]
+networkingMode=mirrored
+firewall=true
+dnsTunneling=true
+autoProxy=true
+```
+
+More info, see [MicroSoft document](https://learn.microsoft.com/en-us/windows/wsl/wsl-config#wslconfig)
