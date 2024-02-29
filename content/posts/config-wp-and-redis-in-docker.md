@@ -1,6 +1,6 @@
 ---
 title: Configure Wordpress and Redis in Docker
-date: 2023-02-09 16:40:01
+date: 2023-02-09T16:40:01Z
 tags:
     - linux
     - play

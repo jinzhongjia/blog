@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Linux in Windows
-date: 2023-04-04 03:10:25
+date: 2023-04-04T03:10:25Z
 tags:
     - linux
     - windows

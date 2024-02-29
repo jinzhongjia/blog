@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How to console in zig?
-date: 2023-02-19 10:39:18
+date: 2023-02-19T10:39:18Z
 tags:
     - zig
 ---

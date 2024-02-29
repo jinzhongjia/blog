@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Emacs Config
-date: 2023-03-02 19:28:20
+date: 2023-03-02T19:28:20Z
 tags:
     - emacs
     - linux

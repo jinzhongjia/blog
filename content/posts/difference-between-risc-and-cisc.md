@@ -1,7 +1,7 @@
 ---
 layout: post
 title: The differences between CISC and RISC
-date: 2023-09-20 21:23:05
+date: 2023-09-20T21:23:05Z
 tags:
     - computer
 ---

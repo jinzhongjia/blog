@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Call zig through FFI in Luajit
-date: 2023-12-20 18:45:59
+date: 2023-12-20T18:45:59Z
 tags:
     - zig
 ---

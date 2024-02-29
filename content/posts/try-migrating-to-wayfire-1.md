@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Try migrating to wayfire 1
-date: 2023-02-22 19:48:29
+date: 2023-02-22T19:48:29Z
 tags:
     - linux
 ---

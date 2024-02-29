@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Implement Disjoint-set Data Structure In Zig
-date: 2023-03-18 15:43:03
+date: 2023-03-18T15:43:03Z
 tags:
     - zig
     - algorithm

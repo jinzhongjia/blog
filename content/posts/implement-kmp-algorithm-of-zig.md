@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Implement KMP algorithm in zig
-date: 2023-03-11 09:59:35
+date: 2023-03-11T09:59:35Z
 tags:
     - zig
     - algorithm

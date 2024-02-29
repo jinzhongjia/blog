@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Debug QEMU with GDB
-date: 2023-04-30 21:01:14
+date: 2023-04-30T21:01:14Z
 tags:
     - linux
     - zig

@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About
-date: 2023-02-09 17:17:52
+date: 2023-02-09T17:17:52Z
 tags:
 ---
 

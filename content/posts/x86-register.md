@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Registers in x86 operating system
-date: 2023-05-27 00:46:28
+date: 2023-05-27T00:46:28Z
 tags:
     - os
 ---

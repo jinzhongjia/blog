@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Assembly in Zig
-date: 2023-04-01 21:51:41
+date: 2023-04-01T21:51:41Z
 tags:
     - zig
     - assembly

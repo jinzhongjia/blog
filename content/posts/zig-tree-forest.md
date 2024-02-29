@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Implement tree and forest in zig
-date: 2023-03-16 20:42:37
+date: 2023-03-16T20:42:37Z
 tags:
     - zig
     - - algorithm
