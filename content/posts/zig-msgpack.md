@@ -136,22 +136,19 @@ var p = pack.init(
 const test_val_1 = false;
 const test_val_2 = true;
 
-try p.write(test_val_1);
-try p.write(test_val_2);
+try p.write(.{ .bool = test_val_1 });
+try p.write(.{ .bool = test_val_2 });
 
-const val_1 = try p.read(bool, allocator);
-const val_2 = try p.read(bool, allocator);
+var val_1 = try p.read(allocator);
+defer val_1.free(allocator);
 
-try std.testing.expect(val_1 == test_val_1);
-try std.testing.expect(val_2 == test_val_2);
+var val_2 = try p.read(allocator);
+defer val_2.free(allocator);
+
+try std.testing.expect(val_1.bool == test_val_1);
+try std.testing.expect(val_2.bool == test_val_2);
 ```
 
-You may notice that we pass in `allocator` in `read`, don't worry, memory allocation is only triggered when the read type or its subtype contains a slice, otherwise we don't need to pay attention to memory management.
-
-In order not to pass the allocator, we also provide `read_value_no_alloc`, it will detect parameter types and report errors at compile time when memory allocation is required, eliminating runtime detection.
-
-## Note
-
-Currently, the pointer types supported by zig-msgpack only include slices, and Str, Ext, Bin, and slice types require manual management and release of memory.
+Overall, we convert the read result into the `Payload` type and obtain the value. This allows us to directly obtain data of unknown structure.
 
 For more examples, check out the unit tests of zig-msgpack.
