@@ -1,6 +1,6 @@
-<mxfile host="Electron" modified="2024-02-29T13:28:31.673Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="WpJIgMYjRvR8Wyd83xn-" version="23.1.5" type="device">
+<mxfile host="Electron" modified="2024-03-09T10:58:22.168Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="cs9EnSTLoNK09WSgap7O" version="23.1.5" type="device">
   <diagram name="第 1 页" id="aiqblZqHGUxjOZp4OMoq">
-    <mxGraphModel dx="1434" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1114" dy="839" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -16,6 +16,15 @@
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="590" y="265" as="sourcePoint" />
             <mxPoint x="610" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-K4UDkxvdP5eBuNdIXLi-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.96;exitY=0.7;exitDx=0;exitDy=0;exitPerimeter=0;curved=1;strokeColor=#666666;" parent="1" source="3oRafrWtNPl6Id3I_nco-13" target="-K4UDkxvdP5eBuNdIXLi-1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="720" y="391" />
+              <mxPoint x="720" y="430" />
+              <mxPoint x="480" y="430" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="3oRafrWtNPl6Id3I_nco-13" value="Read Value" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fontFamily=Maple Mono SC NF;fontSize=14;fontColor=#666666;fillColor=none;strokeColor=#666666;" parent="1" vertex="1">
@@ -47,6 +56,9 @@
         </mxCell>
         <mxCell id="3oRafrWtNPl6Id3I_nco-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.945;exitY=0.45;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.7;entryDx=0;entryDy=0;entryPerimeter=0;curved=1;endArrow=none;endFill=0;fontFamily=Maple Mono SC NF;fontSize=14;fontColor=#666666;strokeColor=#666666;" parent="1" source="3oRafrWtNPl6Id3I_nco-23" target="3oRafrWtNPl6Id3I_nco-17" edge="1">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="-K4UDkxvdP5eBuNdIXLi-1" value="&lt;font face=&quot;Maple Mono SC NF&quot;&gt;Payload&lt;/font&gt;" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeColor=#666666;fontColor=#666666;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="440" y="460" width="80" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
