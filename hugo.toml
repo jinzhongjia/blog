@@ -9,7 +9,12 @@ theme = 'paper'
   [[menu.main]]
     identifier = "about"
     name = "About"
-    url = "/about/"
+    url = "/About/"
+    weight = 10
+  [[menu.main]]
+    identifier = "ArchInstall"
+    name = "ArchInstall"
+    url = "/ArchInstall/"
     weight = 10
 
 [taxonomies]
