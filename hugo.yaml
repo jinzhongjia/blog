@@ -1,0 +1,86 @@
+baseURL: https://nvimer.org/
+languageCode: en-us
+title: Jin's Site
+
+enableRobotsTXT: true
+# enableGitInfo: true
+enableEmoji: false
+hasCJKLanguage: true
+
+outputs:
+  home: [HTML]
+  page: [HTML]
+  section: [HTML, RSS]
+
+module:
+  hugoVersion:
+    extended: true
+    min: "0.112.0"
+
+  workspace: hugo.work
+  imports:
+    - path: github.com/imfing/hextra
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    noClasses: false
+
+enableInlineShortcodes: true
+
+menu:
+  main:
+    - name: Blog
+      pageRef: /blog
+      weight: 1
+    - name: ArchInstall
+      pageRef: /archinstall
+      weight: 2
+    - name: Search
+      weight: 3
+      params:
+        type: search
+    - name: GitHub
+      weight: 4
+      url: "https://github.com/jinzhongjia"
+      params:
+        icon: github
+
+params:
+  description: JinZhongjia's Website.
+  navbar:
+    displayTitle: true
+    displayLogo: true
+    logo:
+      path: logo.png
+      dark: logo.png
+      link: /
+      width: 40
+      height: 20
+    width: wide
+
+  page:
+    # full (100%), wide (90rem), normal (1280px)
+    width: wide
+
+  theme:
+    # light | dark | system
+    default: system
+    displayToggle: true
+  
+  footer:
+    enable: true
+    displayCopyright: true
+    displayPoweredBy: false
+    width: normal
+
+  displayUpdatedDate: true
+  dateFormat: "January 2, 2006"
+
+  highlight:
+    copy:
+      enable: true
+      # hover | always
+      display: hover
