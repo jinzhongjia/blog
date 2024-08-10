@@ -84,3 +84,7 @@ params:
       enable: true
       # hover | always
       display: hover
+
+  editURL:
+    enable: true
+    base: "https://github.com/jinzhongjia/blog/edit/main"
