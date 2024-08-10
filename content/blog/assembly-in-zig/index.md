@@ -7,11 +7,11 @@ tags:
     - assembly
 ---
 
-# Preface
-
 Recently, I want to write a kenel with `zig`, naturally we need to use assembly.
 
 When computer boot, we need to deploy with assembly so we can enter protected mode.
+
+<!--more-->
 
 ## Zig reference assembly
 

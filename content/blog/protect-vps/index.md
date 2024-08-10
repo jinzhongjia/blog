@@ -6,11 +6,11 @@ tags:
     - linux
 ---
 
-## Preface
-
 Everyone connected to the internet is a target for hackers.
 
 The Most Incredible Cyber Attack Statistics of 2021 Find out the number of cyber attacks happening every day around the world.
+
+<!--more-->
 
 - Worldwide, 30,000 websites are hacked every day.
 

@@ -6,9 +6,9 @@ tags:
     - play
 ---
 
-## Foreword
-
 The station has been transferred, and the original 4g small device has been transferred to the current 32g single-use top surface. php+redis+mysql), a caddy under external service. All in all，Containerized incense is complete! 😀
+
+<!--more-->
 
 ## Transfer plan
 

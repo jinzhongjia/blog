@@ -7,11 +7,11 @@ tags:
     - - algorithm
 ---
 
-# Preface
-
 Recently, I review your knowledge about trees and forests, and now I try implement them in zig !
 
 The full code can be found [here](https://gist.github.com/jinzhongjia/a624722848f4cf482254ab18fbe5961e) !
+
+<!--more-->
 
 ## Implement
 

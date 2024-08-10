@@ -7,8 +7,6 @@ tags:
     - linux
 ---
 
-## Foreword
-
 > GNOME is a completely free-form desktop environment. Target operating system is Linux, but mostly BSD based and also supports GNOME. GNOME is a group of contributors and contributors. This is the only one that has been developed, and based on this, it is an item that has been developed and has no problems.
 
 <!--more-->

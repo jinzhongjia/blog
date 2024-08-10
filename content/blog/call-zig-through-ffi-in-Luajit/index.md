@@ -6,11 +6,11 @@ tags:
     - zig
 ---
 
-# Preface
-
 Recently, I have masterd the use of zig, and I accidentally saw an article about luajit's `FFI`. `FFI` can call C function in lua, that inspired me, why not use zig? zig can compile dynamic library which not depend on libc, there will be no compatibility issues.
 
 So, I think this is available, let me try it!
+
+<!--more-->
 
 ## How to use FFI in luajit?
 

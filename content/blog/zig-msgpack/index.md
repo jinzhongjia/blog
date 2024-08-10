@@ -6,9 +6,10 @@ tags:
   - zig
   - msgpack
 ---
-# Preface
 
 MessagePack is an efficient binary serialization format. It lets you exchange data among multiple languages like JSON. But it's faster and smaller. Small integers are encoded into a single byte, and typical short strings require only one extra byte in addition to the strings themselves.
+
+<!--more-->
 
 It's fast and a typical use case is in neovim and redis! For neovim, it is used to as remote rpc protocol.
 

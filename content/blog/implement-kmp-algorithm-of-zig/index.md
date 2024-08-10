@@ -7,10 +7,9 @@ tags:
     - algorithm
 ---
 
-
-## Preface
-
 `KMP` called **Knuth–Morris–Pratt string-searching algorithm**, which is the first linear-time algorithm for string matching.
+
+<!--more-->
 
 According to wikipedia:
 

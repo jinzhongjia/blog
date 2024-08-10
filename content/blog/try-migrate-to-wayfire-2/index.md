@@ -6,9 +6,9 @@ tags:
     - linux
 ---
 
-## Preface
-
 I have already migrate to wayfire, but I also have some other minor issues when using.
+
+<!--more-->
 
 ## Question
 

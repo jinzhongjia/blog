@@ -7,11 +7,11 @@ tags:
     - windows
 ---
 
-# Preface
-
 Recently, I switch to windows, because nvidia's support for linux is too poor, maybe usual using is ok, but when you shut down and check the system log, you will find many problems, such as slow shutdown, errors in the boot log.
 
 So, I'm back in the windows camp. After a short experience, I found that the linux container of windwos is relatively mature now, I install archlinux on `wsl2`, it works very well!
+
+<!--more-->
 
 ![](my_system.jpg)
 

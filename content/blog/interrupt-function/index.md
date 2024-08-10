@@ -7,12 +7,14 @@ tags:
     - kernel
 ---
 
-# Interrupt
-
 Here's what happens when you use the INT instruction to push on the stack:
 
 1. The CPU will query the interrupt vector table.
 2. Then push some context information onto the stack,like this:
+
+<!--more-->
+
+# Interrupt
 
 ![](stack_use.jpg)
 

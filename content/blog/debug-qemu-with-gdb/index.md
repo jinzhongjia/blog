@@ -8,15 +8,15 @@ tags:
     - debug
 ---
 
-![](run.jpg)
-
-# Preface
-
 Recently I was writing a 32-bit kernel with zig, it is so useful, and when I develop it, I meet some situations where I need to use debugger. But now, zig doesn't have official debugger.
 
 I tried bochs and qemu separately, Finally decided to use qemu.
 
 Qemu can debug with `GDB` remotely.
+
+<!--more-->
+
+![](run.jpg)
 
 ## Debug
 

@@ -6,13 +6,13 @@ tags:
     - linux
 ---
 
-## Preface
-
 Recently, I want to migrate to `windows manager`, and I attempt to leran `wayfire`. In the past, I have heard and tried wayfire, but I didn't migrate to it because I need a GUI file manager.
 
 Now, I want to change my habit to adapt `tui file manager` for focusing on work. Another reason is that `DE` takes up too much memory and has some small bugs from time to time.
 
 So, I chose wayfire, a cascading window manager, not tiling, I prefer cascading to tiling.
+
+<!--more-->
 
 ## About [Wayfire](https://github.com/WayfireWM/wayfire)
 

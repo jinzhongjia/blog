@@ -7,11 +7,11 @@ tags:
     - x86_64
 ---
 
-## Preface
-
 On x86_64, if we want to handle interrupts, we need to define IDT(Interrupt Descriptor Table), it has 256 elements.
 
 And we also need to set IDTR(Interrupt Descriptor Table Register). In this article, we won’t discuss setting up IDT, that would be too long.
+
+<!--more-->
 
 We just discuss how to handle interruptions gracefully, pay attention, what we are talking about here is the interrupt handling function, in other words, what you want to fill in the ide (it only fills part of the idt).
 

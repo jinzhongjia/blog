@@ -7,9 +7,9 @@ tags:
     - linux
 ---
 
-# Preface
-
 Recently, I learned `emacs` and elisp, this article records the problems I encountered during using.
+
+<!--more-->
 
 Some learning data:
 
