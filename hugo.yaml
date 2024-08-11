@@ -88,3 +88,13 @@ params:
   editURL:
     enable: false
     base: "https://github.com/jinzhongjia/blog/edit/main/content"
+
+  comments:
+    enable: true
+    type: giscus
+
+    giscus:
+      repo: jinzhongjia/blog
+      repoId: R_kgDOLYroVg
+      category: Comment
+      categoryId: DIC_kwDOLYroVs4CdluW
