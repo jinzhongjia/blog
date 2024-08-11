@@ -1,0 +1,36 @@
+#+TITLE: How to use ox-hugo
+#+AUTHOR: JinZhongjia
+#+DATE: 2024-08-11
+#+HUGO_BASE_DIR: ~/blog
+#+HUGO_SECTION: blog/2024/08/11/ox-hugo-usage
+#+HUGO_SLUG:
+#+HUGO_CATEGORIES: 
+#+HUGO_LAYOUT: blog
+#+EXPORT_FILE_NAME: index.org
+
+[[https://ox-hugo.scripter.co/][ox-hugo]] is a emacs plugin for hugo which can help us to use org in hugo.
+
+It will convert ~.org~ file to ~.md~ file.
+
+#+hugo: more
+
+** Install
+
+We can install it easily, if you use emacs plugin manager ~elpaca~, just use this:
+
+#+begin_src emacs-lisp
+  (use-package ox-hugo
+    :ensure t
+    :defer t
+    :custom
+    (org-hugo-auto-set-lastmod t "auto update latest time")
+    )
+#+end_src
+
+~use-package~ will automatically install it, ~:defer t~ will make it lazy load.
+
+** Config
+
+For configuration of ~ox-hugo~, we need to understand several basic variables.
+
+- 
