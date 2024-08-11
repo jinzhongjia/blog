@@ -86,5 +86,5 @@ params:
       display: hover
 
   editURL:
-    enable: true
-    base: "https://github.com/jinzhongjia/blog/edit/main"
+    enable: false
+    base: "https://github.com/jinzhongjia/blog/edit/main/content"
