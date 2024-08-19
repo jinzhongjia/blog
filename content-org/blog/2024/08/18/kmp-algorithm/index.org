@@ -1,8 +1,8 @@
 #+TITLE: KMP Algorithm
 #+AUTHOR: jinzhongjia 
-#+DATE: 2024-08-19
+#+DATE: 2024-08-18
 #+HUGO_BASE_DIR: ~/blog
-#+HUGO_SECTION: blog/2024/08/19/kmp-algorithm
+#+HUGO_SECTION: blog/2024/08/18/kmp-algorithm
 #+HUGO_CUSTOM_FRONT_MATTER: :math false
 #+HUGO_CATEGORIES: 
 #+HUGO_LAYOUT: blog

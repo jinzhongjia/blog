@@ -1,9 +1,9 @@
 +++
 title = "KMP Algorithm"
 author = ["jinzhongjia"]
-date = 2024-08-19
+date = 2024-08-18
 layout = "blog"
-lastmod = 2024-08-19T09:33:54+08:00
+lastmod = 2024-08-19T09:43:59+08:00
 draft = false
 math = false
 +++
