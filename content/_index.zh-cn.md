@@ -28,6 +28,8 @@ tags:
 
 并且我为 Zig 编写了一整套完整的中文教程, 可以在这里阅读它: [https://learnzig.nvimer.org/](https://learnzig.nvimer.org/).
 
+我的 Emacs [配置](https://nvimer.org/emacs.html)
+
 以下是我的项目:
 
 - [LspUI.nvim](https://github.com/jinzhongjia/LspUI.nvim)
